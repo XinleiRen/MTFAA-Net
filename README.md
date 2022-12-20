@@ -1,1 +1,1 @@
-# MTFAA_Net
+An unofficial Tensorflow implementation of MTFAA-Net: "Multi-Scale Temporal Frequency Convolutional Network With Axial Attention for Speech Enhancement", which was implemented for 16kHz audios.

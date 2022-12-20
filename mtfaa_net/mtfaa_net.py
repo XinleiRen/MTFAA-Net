@@ -28,7 +28,7 @@ def lossFunction(y_true, y_pred):
 
 def mtfaa_net(input_shape, lr):
     # shape: [B, T, F, C]
-    inputs = Input(shape=input_shape)
+    inputs = Input(shape=input_shape, dtype=tf.complex64)
     cin = inputs.shape[-1]
     
     pe = phase_encoder(inputs, channel=int(cin*4))

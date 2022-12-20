@@ -45,9 +45,9 @@ def mea(inputs, stft_spec, channel=1, rm_size=(1,3)):
 
 
 if __name__ == "__main__":
-    inputs = tf.ones([8, 200, 384, 2])
+    inputs = tf.ones([8, 200, 384, 1])
     stft_spec = tf.complex(tf.ones([8, 200, 384, 1]), tf.ones([8, 200, 384, 1]))
-    outputs = mea(inputs, stft_spec, channel=2)
+    outputs = mea(inputs, stft_spec)
     
     print('inputs.shape:', inputs.shape)
     print('outputs.shape:', outputs.shape)

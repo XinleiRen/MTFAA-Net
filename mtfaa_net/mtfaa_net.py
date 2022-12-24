@@ -37,7 +37,7 @@ def mtfaa_net(input_shape, lr):
     bs = Conv2DTranspose(filters=cin, kernel_size=(1,2), strides=(1,1))(ed)
     outputs = mea(bs, inputs)
     
-    model = tf.keras.Model(inputs=inputs, outputs=outputs) 
+    model = tf.keras.Model(inputs=inputs, outputs=outputs)
     optimizer = Adam(lr=lr)
     model.compile(loss=lossFunction, optimizer=optimizer)    
     

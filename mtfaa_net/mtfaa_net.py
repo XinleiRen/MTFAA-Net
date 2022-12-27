@@ -13,13 +13,24 @@ from ed import encoder_decoder
 from meam import mea
 
 def lossFunction(y_true, y_pred):
-    # shape: [B, T, F]
-    speech_real = tf.math.real(y_true)
-    speech_imag = tf.math.imag(y_true)
-    est_speech_real = tf.math.real(y_pred)
-    est_speech_imag = tf.math.imag(y_pred)
+    # shape: [B, T, F, C]
+    speech = y_true[..., 0]
+    noise = y_true[..., 1]
+    est_speech = y_pred[..., 0]
+    est_noise = y_pred[..., 1]
+    
+    speech_real = tf.math.real(speech)
+    speech_imag = tf.math.imag(speech)
+    noise_real = tf.math.real(noise)
+    noise_imag = tf.math.imag(noise)
+    est_speech_real = tf.math.real(est_speech)
+    est_speech_imag = tf.math.imag(est_speech)
+    est_noise_real = tf.math.real(est_noise)
+    est_noise_imag = tf.math.imag(est_noise)
     
     loss = tf.math.abs(tf.math.log(tf.math.abs(speech_real) + tf.math.abs(speech_imag) + 1) - tf.math.log(tf.math.abs(est_speech_real) + tf.math.abs(est_speech_imag) + 1))
+    loss = loss + tf.math.abs(tf.math.log(tf.math.abs(noise_real) + tf.math.abs(noise_imag) + 1) - tf.math.log(tf.math.abs(est_noise_real) + tf.math.abs(est_noise_imag) + 1))
+    
     loss = tf.reduce_mean(loss, axis=-1)
     loss = tf.reduce_mean(loss, axis=-1)
     
